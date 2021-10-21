@@ -7,10 +7,15 @@ use MVC\Core\Model;
 
 class User extends DbModel
 {
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_DELETE = 2;
+
     public $firstname = ""; 
     public $lastname = "";
     public $email = "";
     public $password = "";
+    public $status = self::STATUS_INACTIVE;
     public $confirmPassword = "";
 
     public function tableName() : string
@@ -21,14 +26,15 @@ class User extends DbModel
 
     public function attributes() : array
     {
-        return ['firstname', 'lastname', 'email', 'password'];
+        return ['firstname', 'lastname', 'email', 'password', 'status'];
         # code...
     }
 
-    public function register()
+    public function save()
     {
-        return $this->save();
-
+        $this->status = self::STATUS_INACTIVE;
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        return parent::save();
         // echo "Creeating New User";
     }
 
