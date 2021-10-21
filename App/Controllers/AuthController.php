@@ -5,6 +5,7 @@ namespace MVC\App\Controllers;
 use MVC\Core\Request;
 use MVC\Core\Controller;
 use MVC\App\Models\User;
+use MVC\Core\Application;
 
 class AuthController extends Controller
 {
@@ -21,7 +22,9 @@ class AuthController extends Controller
         if ($request->isPost()) {
             $user->loadData($request->getBody());
             if($user->validate() && $user->save()) {
-                return "Success";
+                
+                Application::$app->session->setFlash('success', 'Thanks For Registering');
+                Application::$app->response->redirect('/');
             }
             // var_dump($user->errors);
 

@@ -5,6 +5,8 @@ namespace MVC\Core;
 
 use MVC\Core\Router;
 use MVC\Core\Request;
+use MVC\Core\Session;
+use MVC\Core\Database;
 use MVC\Core\Response;
 
 class Application
@@ -15,6 +17,7 @@ class Application
     public static Application $app;
     public Controller $controller;
     public Database $db;
+    public Session $session;
     public static $ROOT_DIR;
 
     /**
@@ -28,6 +31,7 @@ class Application
         self::$app = $this;
         $this->router = new Router($this->request, $this->response);
         $this->db = new Database($config['db']);
+        $this->session = new Session();
     }
 
 
