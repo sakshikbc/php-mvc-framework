@@ -2,9 +2,10 @@
 
 namespace MVC\App\Models;
 
+use MVC\Core\DbModel;
 use MVC\Core\Model;
 
-class RegisterModel extends Model
+class User extends DbModel
 {
     public $firstname = ""; 
     public $lastname = "";
@@ -12,9 +13,23 @@ class RegisterModel extends Model
     public $password = "";
     public $confirmPassword = "";
 
+    public function tableName() : string
+    {
+        return 'users';
+        # code...
+    }
+
+    public function attributes() : array
+    {
+        return ['firstname', 'lastname', 'email', 'password'];
+        # code...
+    }
+
     public function register()
     {
-        echo "Creeating New User";
+        return $this->save();
+
+        // echo "Creeating New User";
     }
 
     public function rules() : array

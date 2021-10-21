@@ -4,7 +4,7 @@ namespace MVC\App\Controllers;
 
 use MVC\Core\Request;
 use MVC\Core\Controller;
-use MVC\App\Models\RegisterModel;
+use MVC\App\Models\User;
 
 class AuthController extends Controller
 {
@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $registerModal = new RegisterModel();
+        $registerModal = new User();
 
         if ($request->isPost()) {
             $registerModal->loadData($request->getBody());

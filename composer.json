@@ -6,7 +6,9 @@
             "email": "sakshikbc@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "vlucas/phpdotenv": "^5.3"
+    },
     "autoload": {
         "psr-4": {
             "MVC\\" : "./"
