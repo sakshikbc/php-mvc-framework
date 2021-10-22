@@ -1,17 +1,21 @@
+<?php
+/**
+ * @var $model \MVC\App\Models\User
+ */
+?>
 <h1>Create An Account</h1>
 <?php
 use MVC\Core\Form\Form;
 $form = Form::begin("", "POST") ?>
+    <div class="row">
+        <div class="col">
+        <?php echo $form->field($model, 'firstname'); ?>
+        </div>
+        <div class="col">
+        <?php echo $form->field($model, 'lastname'); ?>
+        </div>
+    </div>
 <?php
-    echo '<div class="row">';
-        echo '<div class="col">';
-            echo $form->field($model, 'firstname');    
-        echo '</div>';
-        echo '<div class="col">'; 
-            echo $form->field($model, 'lastname');    
-        echo '</div>';
-    echo '</div>';
-       
     echo $form->field($model, 'email');    
     echo $form->field($model, 'password')->passwordField();    
     echo $form->field($model, 'confirmPassword')->passwordField();    

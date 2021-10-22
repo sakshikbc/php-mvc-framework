@@ -4,8 +4,9 @@ namespace MVC\App\Models;
 
 use MVC\Core\DbModel;
 use MVC\Core\Model;
+use MVC\Core\UserModel;
 
-class User extends DbModel
+class User extends UserModel
 {
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
@@ -21,7 +22,11 @@ class User extends DbModel
     public function tableName() : string
     {
         return 'users';
-        # code...
+    }
+
+    public function primaryKey() : string
+    {
+        return 'id';
     }
 
     public function attributes() : array
@@ -62,6 +67,11 @@ class User extends DbModel
             'confirmPassword' => 'Confirm Password'
         ];
         # code...
+    }
+
+    public function getDisplayName(): string
+    {
+        return $this->firstname . ' ' . $this->lastname;
     }
 
 }

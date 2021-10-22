@@ -56,7 +56,7 @@ class Router
         }
 
         // return call_user_func([SiteController::class, 'handleContact']);
-        return call_user_func($callback, $this->request);
+        return call_user_func($callback, $this->request, $this->response);
         
     }
 

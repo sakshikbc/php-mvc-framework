@@ -1,13 +1,16 @@
+<?php
+/**
+ * @var $model \MVC\App\Models\LoginForm
+ */
+?>
 <h1>Login</h1>
+<?php
+use MVC\Core\Form\Form;
+$form = Form::begin("", "POST") ?>
 
-<form action="" method="POST">
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email" class="form-control" name="email">
-    </div>
-    <div class="form-group">
-        <label>Body</label>
-        <textarea name="body" class="form-control"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<?php
+    echo $form->field($model, 'email');    
+    echo $form->field($model, 'password')->passwordField();    
+?>
+<button type="submit" class="btn btn-primary">Register</button>
+<?php Form::end(); ?>
