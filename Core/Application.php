@@ -8,6 +8,7 @@ use MVC\Core\Request;
 use MVC\Core\Session;
 use MVC\Core\Database;
 use MVC\Core\Response;
+use MVC\Core\View;
 
 class Application
 {
@@ -21,6 +22,7 @@ class Application
     public Database $db;
     public ?DbModel $user;
     public Session $session;
+    public View $view;
     public static $ROOT_DIR;
     public string $userClass;
 
@@ -37,6 +39,7 @@ class Application
         $this->router = new Router($this->request, $this->response);
         $this->db = new Database($config['db']);
         $this->session = new Session();
+        $this->view = new View();
 
         $primaryValue = $this->session->get('user');
         if($primaryValue) {
@@ -54,7 +57,8 @@ class Application
         try {
             echo $this->router->resolve();
         } catch (\Exception $e){
-            echo $this->router->renderView('_error', [
+            $this->response->setStatusCode(403);
+            echo $this->view->renderView('_error', [
                 'exception' => $e
             ]);
         }

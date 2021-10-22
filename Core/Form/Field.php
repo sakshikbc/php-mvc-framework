@@ -4,7 +4,7 @@ namespace MVC\Core\Form;
 
 use MVC\Core\Model;
 
-class Field
+class Field extends BaseField
 {
     public const TYPE_TEXT = "text";
     public const TYPE_PASSWORD = "password";
@@ -21,31 +21,10 @@ class Field
     public function __construct(Model $model, $attribute)
     {
         $this->type = self::TYPE_TEXT;
-        $this->model = $model;
-        $this->attribute = $attribute;
+        parent::__construct($model, $attribute);
     }
 
-    public function __toString()
-    {
-        # code...
-        return sprintf('
-            <div class="form-group">
-                <label>%s</label>
-                <input type="%s" class="form-control %s" name="%s" value="%s">
-                <div class="invalid-feedback" style="display:block">
-                %s
-                </div>
-            </div>',
-            $this->model->getLabel($this->attribute) ?? $this->attribute,
-            $this->type,
-            $this->model->hasError(($this->attribute) ? ' is-invalid' : ''),
-            $this->attribute,
-            $this->model->{$this->attribute},
-            $this->model->getFirstError($this->attribute)
-
-        );
-    }
-
+    
 
     public function passwordField()
     {
@@ -54,4 +33,14 @@ class Field
         return $this;
     }
 
+    public function renderInput(): string
+    {
+        return sprintf('
+        <input type="%s" class="form-control %s" name="%s" value="%s">
+        ', 
+        $this->type,
+        $this->model->hasError(($this->attribute) ? ' is-invalid' : ''),
+        $this->attribute,
+        $this->model->{$this->attribute});
+    }
 }

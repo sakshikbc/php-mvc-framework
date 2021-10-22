@@ -33,7 +33,7 @@ $app->router->post('/register', [AuthController::class, 'register']);
 // var_dump(dirname(__DIR__));
 
 $app->router->get('/contact', [SiteController::class, 'contact']);
-$app->router->post('/contact', [SiteController::class, 'handleContact']);
+$app->router->post('/contact', [SiteController::class, 'contact']);
 
 $app->router->get('/profile', [AuthController::class, 'profile']);
 
