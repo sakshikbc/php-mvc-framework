@@ -6,15 +6,5 @@
             "email": "sakshikbc@gmail.com"
         }
     ],
-    "require": {
-        "vlucas/phpdotenv": "^5.3"
-    },
-    "autoload": {
-        "psr-4": {
-            "MVC\\" : "./"
-        },
-        "files": [
-            "./helper.php"
-        ]
-    }
+    "require": {}
 }
