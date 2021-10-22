@@ -5,7 +5,7 @@ namespace MVC\Core;
 use MVC\Core\Request;
 use MVC\Core\Response;
 use MVC\App\Controllers\SiteController;
-
+use MVC\Core\Exceptions\NotFoundException;
 
 class Router
 {
@@ -41,7 +41,8 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;
         if($callback == false) {
             $this->response->setStatusCode(404);
-            return $this->renderView("_404");
+            // return $this->renderView("_404");
+            throw new NotFoundException();
         }
 
         if(is_string($callback)) {
