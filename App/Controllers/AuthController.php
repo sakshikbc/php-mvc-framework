@@ -8,9 +8,20 @@ use MVC\App\Models\User;
 use MVC\Core\Controller;
 use MVC\Core\Application;
 use MVC\App\Models\LoginForm;
+use MVC\Core\Middlewares\AuthMiddleware;
 
 class AuthController extends Controller
 {
+
+    /**
+     * Class constructor.
+     */
+    public function __construct()
+    {
+        $this->registerMiddleware(new AuthMiddleware(['profile']));
+    }
+
+
     public function login(Request $request, Response $response)
     {
         $loginForm = new LoginForm();
@@ -49,5 +60,10 @@ class AuthController extends Controller
         return $this->render('register', [
             'model' => $user
         ]);
+    }
+
+    public function profile()
+    {
+        return $this->render('profile');
     }
 }

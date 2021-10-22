@@ -45,6 +45,11 @@ use MVC\Core\Application;
             <?php else : ?>
                 <ul class="navbar-nav ml-auto" style="float: right;">
                     <li class="nav-item">
+                        <a class="nav-link" href="/profile" aria-current="page">
+                            Profile
+                            </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/logout" aria-current="page">
                             Welcome <?php echo Application::$app->user->getDisplayName() ?? 'Logout'; ?>
                             </a>

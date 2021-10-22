@@ -35,4 +35,7 @@ $app->router->post('/register', [AuthController::class, 'register']);
 $app->router->get('/contact', [SiteController::class, 'contact']);
 $app->router->post('/contact', [SiteController::class, 'handleContact']);
 
+$app->router->get('/profile', [AuthController::class, 'profile']);
+
+
 $app->run();

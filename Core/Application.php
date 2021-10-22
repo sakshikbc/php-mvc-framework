@@ -11,11 +11,13 @@ use MVC\Core\Response;
 
 class Application
 {
+    public $layout = 'main';
+
     public Router $router;
     public Request $request;
     public Response $response;
     public static Application $app;
-    public Controller $controller;
+    public ?Controller $controller = null;
     public Database $db;
     public ?DbModel $user;
     public Session $session;
@@ -49,7 +51,13 @@ class Application
 
     public function run()
     {
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $e){
+            echo $this->router->renderView('_error', [
+                'exception' => $e
+            ]);
+        }
     }
 
     public static function isGuest()
@@ -93,6 +101,7 @@ class Application
     {
         $this->user = null;
         $this->session->remove('user');
+        // $this->response->redirect('/');
     }
 }
 
